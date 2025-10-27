@@ -73,7 +73,7 @@ export default function BookList({ query, onBookSelect }) {
       const data = await res.json();
       
       let results = data.docs || [];
-      console.log(`📚 Raw results: ${results.length} books found`);
+      console.log(`Raw results: ${results.length} books found`);
       
       // Apply local filters
       results = applyLocalFilters(results);
@@ -83,10 +83,10 @@ export default function BookList({ query, onBookSelect }) {
       
       setBooks(results);
       setCurrentPage(1); // Reset to first page when new search
-      console.log(`✅ Filtered results: ${results.length} books after filters`);
+      console.log(`Filtered results: ${results.length} books after filters`);
       
     } catch (err) {
-      console.error("❌ Error fetching books:", err);
+      console.error("Error fetching books:", err);
       setBooks([]);
     } finally {
       setLoading(false);
@@ -97,12 +97,12 @@ export default function BookList({ query, onBookSelect }) {
   const applyLocalFilters = (books) => {
     let filtered = [...books];
     
-    console.log("🔧 Applying local filters:", filters);
+    console.log("Applying local filters:", filters);
     
     // Year filter
     if (filters.year) {
       filtered = filtered.filter(book => book.first_publish_year == filters.year);
-      console.log(`📅 After year filter (${filters.year}): ${filtered.length} books`);
+      console.log(`After year filter (${filters.year}): ${filtered.length} books`);
     }
     
     // Language filter
@@ -110,13 +110,13 @@ export default function BookList({ query, onBookSelect }) {
       filtered = filtered.filter(book => 
         book.language?.includes(filters.language)
       );
-      console.log(`🌐 After language filter (${filters.language}): ${filtered.length} books`);
+      console.log(`After language filter (${filters.language}): ${filtered.length} books`);
     }
     
     // Cover filter
     if (filters.hasCover) {
       filtered = filtered.filter(book => book.cover_i);
-      console.log(`🖼️ After cover filter: ${filtered.length} books`);
+      console.log(`After cover filter: ${filtered.length} books`);
     }
     
     // Sort results
@@ -163,7 +163,7 @@ export default function BookList({ query, onBookSelect }) {
     const sortedLanguages = Array.from(languages).sort();
     const sortedYears = Array.from(years).sort((a, b) => b - a);
     
-    console.log(`📊 Available filters - Languages: ${sortedLanguages.length}, Years: ${sortedYears.length}`);
+    console.log(`Available filters - Languages: ${sortedLanguages.length}, Years: ${sortedYears.length}`);
     
     setAvailableFilters({
       languages: sortedLanguages,
@@ -173,7 +173,7 @@ export default function BookList({ query, onBookSelect }) {
 
   // Reset all filters
   const resetFilters = () => {
-    console.log("🔄 Resetting all filters");
+    console.log("Resetting all filters");
     setFilters({
       searchType: "q",
       sortBy: "relevance",
@@ -186,7 +186,7 @@ export default function BookList({ query, onBookSelect }) {
 
   // Handle filter changes
   const handleFilterChange = (key, value) => {
-    console.log(`🎛️ Filter changed: ${key} = ${value}`);
+    console.log(`Filter changed: ${key} = ${value}`);
     setFilters(prev => ({ ...prev, [key]: value }));
     setCurrentPage(1); // Reset to first page when filters change
   };

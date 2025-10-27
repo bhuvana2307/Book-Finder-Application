@@ -14,46 +14,38 @@ export default function App() {
   // console.log("Query:", query);
 
   useEffect(() => {
-    console.log("🔄 SELECTED BOOK CHANGED:", selectedBook ? selectedBook.title : "null");
   }, [selectedBook]);
 
   const handleBookSelect = (book) => {
-    // console.log("🟢 ========== BOOK SELECTED ==========");
-    // console.log("🟢 Book:", book.title);
-    // console.log("🟢 Setting selectedBook and forceDetails to true");
+    
     setSelectedBook(book);
     setForceDetails(true);
   };
 
   const handleBackToList = () => {
-    // console.log("🔙 ========== BACK TO LIST ==========");
     setSelectedBook(null);
     setForceDetails(false);
   };
 
   const handleSearch = (searchQuery) => {
-    // console.log("🔍 ========== SEARCH TRIGGERED ==========");
-    // console.log("🔍 Search Query:", searchQuery);
-    // console.log("🔍 Current selectedBook:", selectedBook ? selectedBook.title : "null");
-    // console.log("🔍 Current forceDetails:", forceDetails);
+
     
     setQuery(searchQuery);
     
     // ONLY reset if we're not forcing details view
     if (!forceDetails) {
-      console.log("🔍 Resetting selectedBook (not in details view)");
+      console.log("Resetting selectedBook (not in details view)");
       setSelectedBook(null);
     } else {
-      console.log("🔍 Keeping selectedBook (in details view)");
+      console.log("Keeping selectedBook (in details view)");
     }
   };
 
   // DECISION: What to render?
   const shouldShowDetails = selectedBook && forceDetails;
-  // console.log("🎯 RENDER DECISION - Show Details:", shouldShowDetails);
+  // console.log("RENDER DECISION - Show Details:", shouldShowDetails);
 
   if (shouldShowDetails) {
-    // console.log("📖 ========== RENDERING BOOK DETAILS ==========");
     return (
       <div className="min-h-screen bg-gray-50">
         <Header onSearch={handleSearch} />
@@ -62,7 +54,6 @@ export default function App() {
     );
   }
 
-  // console.log("📚 ========== RENDERING BOOK LIST ==========");
   return (
     <div className="min-h-screen bg-gray-50">
       <Header onSearch={handleSearch} />

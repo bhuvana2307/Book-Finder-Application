@@ -5,13 +5,13 @@ export default function BookDetails({ book, onBack }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log("📖 BOOKDETAILS COMPONENT MOUNTED");
-  console.log("📖 Received book:", book);
-  console.log("📖 Book key:", book?.key);
+  console.log("BOOKDETAILS COMPONENT MOUNTED");
+  console.log("Received book:", book);
+  console.log("Book key:", book?.key);
 
   useEffect(() => {
     if (!book) {
-      console.log("❌ No book provided to BookDetails");
+      console.log("No book provided to BookDetails");
       setLoading(false);
       return;
     }
@@ -20,11 +20,10 @@ export default function BookDetails({ book, onBack }) {
       try {
         setLoading(true);
         setError(null);
-        console.log("🔄 Starting fetch for book details...");
 
         // Extract work ID from book key
         const workId = book.key.replace("/works/", "");
-        console.log("🔄 Fetching details for work ID:", workId);
+        console.log("Fetching details for work ID:", workId);
         
         const response = await fetch(`https://openlibrary.org/works/${workId}.json`);
         
@@ -33,16 +32,15 @@ export default function BookDetails({ book, onBack }) {
         }
         
         const data = await response.json();
-        console.log("✅ Successfully fetched book details");
-        console.log("✅ Book details data:", data);
+        console.log("Successfully fetched book details");
+        console.log("Book details data:", data);
         setBookDetails(data);
         
       } catch (err) {
-        console.error("❌ Error fetching book details:", err);
+        console.error("Error fetching book details:", err);
         setError(err.message);
       } finally {
         setLoading(false);
-        console.log("🏁 Fetch completed, loading set to false");
       }
     };
 
